@@ -1,0 +1,14 @@
+{
+    "botman/driver-config": [
+        "stubs/zenviawhatsapp.php"
+    ],
+    "botman/driver": [
+        "BotMan\\Drivers\\ZenviaWhatsapp\\ZenviaWhatsappDriver",
+        "BotMan\\Drivers\\ZenviaWhatsapp\\ZenviaWhatsappAudioDriver",
+        "BotMan\\Drivers\\ZenviaWhatsapp\\ZenviaWhatsappFileDriver",
+        "BotMan\\Drivers\\ZenviaWhatsapp\\ZenviaWhatsappLocationDriver",
+        "BotMan\\Drivers\\ZenviaWhatsapp\\ZenviaWhatsappContactDriver",
+        "BotMan\\Drivers\\ZenviaWhatsapp\\ZenviaWhatsappPhotoDriver",
+        "BotMan\\Drivers\\ZenviaWhatsapp\\ZenviaWhatsappVideoDriver"
+    ]
+}

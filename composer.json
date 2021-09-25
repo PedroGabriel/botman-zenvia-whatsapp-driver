@@ -1,0 +1,50 @@
+{
+    "name": "botman/driver-zenviawhatsapp",
+    "license": "MIT",
+    "description": "Zenvia Whatsapp driver for BotMan",
+    "keywords": [
+        "Bot",
+        "BotMan",
+        "Zenvia",
+        "Whatsapp"
+    ],
+    "homepage": "http://github.com/botman/driver-zenviawhatsapp",
+    "authors": [
+        {
+            "name": "Marcel Pociot",
+            "email": "m.pociot@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "botman/botman": "^2.0"
+    },
+    "require-dev": {
+        "botman/studio-addons": "^1.0",
+        "illuminate/contracts": "^5.5",
+        "phpunit/phpunit": "^5.0",
+        "mockery/mockery": "^1.1",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "BotMan\\Drivers\\ZenviaWhatsapp\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "cs": "php-cs-fixer fix"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BotMan\\Drivers\\ZenviaWhatsapp\\Providers\\ZenviaWhatsappServiceProvider"
+            ]
+        }
+    }
+}
