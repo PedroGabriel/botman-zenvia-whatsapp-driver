@@ -18,7 +18,7 @@ class ZenviaWhatsappPhotoDriver extends ZenviaWhatsappDriver
      */
     public function matchesRequest()
     {
-        return ! is_null($this->event->get('from')) && ! is_null($this->event->get('photo'));
+        return !is_null($this->event) && !is_null($this->event->get('from')) && !is_null($this->event->get('photo'));
     }
 
     /**
