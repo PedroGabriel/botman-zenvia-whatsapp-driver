@@ -27,7 +27,6 @@ class ZenviaWhatsappDriver extends HttpDriver
     const DRIVER_NAME = 'ZenviaWhatsapp';
     const API_URL = 'https://api.zenvia.com/v2/channels/whatsapp';
     const FILE_API_URL = 'https://api.zenvia.com/v2/channels/whatsapp';
-    const LOGIN_EVENT = 'zenvia_whatsapp_login';
 
     protected $endpoint = 'channels/whatsapp/messages';
 
@@ -41,10 +40,14 @@ class ZenviaWhatsappDriver extends HttpDriver
      */
     public function buildPayload(Request $request)
     {
-        $this->payload = new ParameterBag((array) json_decode($request->getContent(), true));
+        $payload = (array) json_decode($request->getContent(), true);
+        $this->payload = new ParameterBag($payload);
 
         if($this->payload->get('message')) {
             $message = $this->payload->get('message');
+            if(isset($message['contents'][0]['payload'])){
+                $message['contents'][0]['text'] = $message['contents'][0]['payload'];
+            }
             $this->event = Collection::make($message);
         }
         $this->config = Collection::make($this->config->get('zenvia_whatsapp'));
@@ -161,10 +164,8 @@ class ZenviaWhatsappDriver extends HttpDriver
     {
         $replies = Collection::make($question->getButtons())->map(function ($button) {
             return [
-                array_merge([
-                    'title' => (string) $button['text'],
-                    'id' => (string) $button['value'],
-                ], $button['additional']),
+                'id' => (string) $button['value'],
+                'title' => (string) $button['text'],
             ];
         });
 
@@ -202,6 +203,7 @@ class ZenviaWhatsappDriver extends HttpDriver
         $this->endpoint = 'messages';
         if ($message instanceof Question) {
             $contents['type'] = 'button';
+            $contents['body'] = 'Selecione';
             $contents['buttons'] = $this->convertQuestion($message);
         } elseif ($message instanceof OutgoingMessage) {
             if ($message->getAttachment() !== null) {
@@ -245,8 +247,6 @@ class ZenviaWhatsappDriver extends HttpDriver
         }
 
         $parameters['contents'][] = $contents;
-        // print_r($parameters);
-        // exit;
         return $parameters;
     }
 
