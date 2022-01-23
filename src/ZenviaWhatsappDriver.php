@@ -245,7 +245,7 @@ class ZenviaWhatsappDriver extends HttpDriver
         } else {
             $contents['text'] = $message;
         }
-print_r($contents);exit;
+
         $parameters['contents'][] = $contents;
         return $parameters;
     }
