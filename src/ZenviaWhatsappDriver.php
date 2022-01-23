@@ -212,7 +212,7 @@ class ZenviaWhatsappDriver extends HttpDriver
                 if ($attachment instanceof Image || $attachment instanceof Video || $attachment instanceof Audio || $attachment instanceof File) {
                     $contents['type'] = 'file';
                     $contents['fileUrl'] = $attachment->getUrl();
-                    if ($attachment->getTitle() !== null) {
+                    if (method_exists($attachment, 'getTitle') && $attachment->getTitle() !== null) {
                         $contents['fileCaption'] = $attachment->getTitle();
                     }
                 } elseif ($attachment instanceof Location) {
@@ -245,7 +245,7 @@ class ZenviaWhatsappDriver extends HttpDriver
         } else {
             $contents['text'] = $message;
         }
-
+print_r($contents);exit;
         $parameters['contents'][] = $contents;
         return $parameters;
     }
