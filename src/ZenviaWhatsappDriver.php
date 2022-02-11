@@ -205,6 +205,15 @@ class ZenviaWhatsappDriver extends HttpDriver
             $contents['type'] = 'button';
             $contents['body'] = $message->getText();
             $contents['buttons'] = $this->convertQuestion($message);
+            if(count($contents['buttons']) > 3){
+                unset($contents['buttons']);
+                $contents['type'] = 'list';
+                $contents['button'] = "Abrir";
+                $contents['sections'] = [
+                    'title' => 'Selecione',
+                    'rows' => $this->convertQuestion($message),
+                ];
+            }
         } elseif ($message instanceof OutgoingMessage) {
             if ($message->getAttachment() !== null) {
                 $attachment = $message->getAttachment();
