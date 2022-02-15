@@ -209,10 +209,10 @@ class ZenviaWhatsappDriver extends HttpDriver
                 unset($contents['buttons']);
                 $contents['type'] = 'list';
                 $contents['button'] = "Abrir";
-                $contents['sections'] = [
+                $contents['sections'] = [[
                     'title' => 'Selecione',
                     'rows' => $this->convertQuestion($message),
-                ];
+                ]];
             }
         } elseif ($message instanceof OutgoingMessage) {
             if ($message->getAttachment() !== null) {
