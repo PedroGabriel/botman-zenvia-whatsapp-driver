@@ -217,8 +217,8 @@ class ZenviaWhatsappDriver extends HttpDriver
         } elseif ($message instanceof OutgoingMessage) {
             if ($message->getAttachment() !== null) {
                 $attachment = $message->getAttachment();
-                $contents['fileCaption'] = $message->getText();
                 if ($attachment instanceof Image || $attachment instanceof Video || $attachment instanceof Audio || $attachment instanceof File) {
+                    $contents['fileCaption'] = $message->getText();
                     $contents['type'] = 'file';
                     $contents['fileUrl'] = $attachment->getUrl();
                     if (method_exists($attachment, 'getTitle') && $attachment->getTitle() !== null) {
@@ -237,17 +237,28 @@ class ZenviaWhatsappDriver extends HttpDriver
                     if (isset($parameters['url'])) {
                         $contents['url'] = $parameters['url'];
                     }
+                } elseif ($attachment instanceof Contact) {
+                    $contents['type'] = 'contacts';
+                    $contents['contacts'] = [
+                        [
+                            'name' => [
+                                'formattedName' => $attachment->getFirstName(),
+                                'firstName' => $attachment->getFirstName(),
+                            ],
+                            'phones' => [
+                                [
+                                    'type' => 'CELL',
+                                    'phone' => ltrim($attachment->getPhoneNumber(), '+55'),
+                                    'waId' => '+55'.ltrim($attachment->getPhoneNumber(), '+55'),
+                                ],
+                            ],
+                        ],
+                    ];
+
+                    if($attachment->getImage()){
+                        $contents['contacts'][0]['contactImage'] = $attachment->getImage();
+                    }
                 }
-                //  elseif ($attachment instanceof Contact) {
-                //     $contents['type'] = 'contacts';
-                //     $contents['phone_number'] = $attachment->getPhoneNumber();
-                //     $contents['first_name'] = $attachment->getFirstName();
-                //     $contents['last_name'] = $attachment->getLastName();
-                //     $contents['user_id'] = $attachment->getUserId();
-                //     if (null !== $attachment->getVcard()) {
-                //         $contents['vcard'] = $attachment->getVcard();
-                //     }
-                // }
             } else {
                 $contents['text'] = $message->getText();
             }
