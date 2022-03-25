@@ -255,8 +255,8 @@ class ZenviaWhatsappDriver extends HttpDriver
                         ],
                     ];
 
-                    if($attachment->getImage()){
-                        $contents['contacts'][0]['contactImage'] = $attachment->getImage();
+                    if($attachment->getVcard()){
+                        $contents['contacts'][0]['contactImage'] = $attachment->getVcard();
                     }
                 }
             } else {
