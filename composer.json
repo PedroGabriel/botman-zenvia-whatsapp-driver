@@ -9,12 +9,6 @@
         "Whatsapp"
     ],
     "homepage": "http://github.com/botman/driver-zenviawhatsapp",
-    "authors": [
-        {
-            "name": "Marcel Pociot",
-            "email": "m.pociot@gmail.com"
-        }
-    ],
     "require": {
         "php": ">=7.0",
         "botman/botman": "^2.0"
