@@ -218,11 +218,11 @@ class ZenviaWhatsappDriver extends HttpDriver
             if ($message->getAttachment() !== null) {
                 $attachment = $message->getAttachment();
                 if ($attachment instanceof Image || $attachment instanceof Video || $attachment instanceof Audio || $attachment instanceof File) {
-                    $contents['fileCaption'] = $message->getText();
+                    $contents['fileName'] = $message->getText();
                     $contents['type'] = 'file';
                     $contents['fileUrl'] = $attachment->getUrl();
                     if (method_exists($attachment, 'getTitle') && $attachment->getTitle() !== null) {
-                        $contents['fileCaption'] = $attachment->getTitle();
+                        $contents['fileName'] = $attachment->getTitle();
                     }
                 } elseif ($attachment instanceof Location) {
                     $contents['type'] = 'location';
