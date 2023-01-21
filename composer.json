@@ -1,7 +1,7 @@
 {
     "name": "botman/driver-zenviawhatsapp",
     "license": "MIT",
-    "description": "Zenvia Whatsapp driver for BotMan",
+    "description": "Zenvia Whatsapp api driver for BotMan",
     "keywords": [
         "Bot",
         "BotMan",
@@ -9,12 +9,6 @@
         "Whatsapp"
     ],
     "homepage": "http://github.com/botman/driver-zenviawhatsapp",
-    "authors": [
-        {
-            "name": "Marcel Pociot",
-            "email": "m.pociot@gmail.com"
-        }
-    ],
     "require": {
         "php": ">=7.0",
         "botman/botman": "^2.0"
